@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\api\V1;
 
-use App\Models\notification;
+use App\Models\Order_historie;
 use Illuminate\Http\Request;
 
-class NotificationController extends Controller
+class OrderHistorieController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class NotificationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\notification  $notification
+     * @param  \App\Models\Order_historie  $order_historie
      * @return \Illuminate\Http\Response
      */
-    public function show(notification $notification)
+    public function show(Order_historie $order_historie)
     {
         //
     }
@@ -52,10 +52,10 @@ class NotificationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\notification  $notification
+     * @param  \App\Models\Order_historie  $order_historie
      * @return \Illuminate\Http\Response
      */
-    public function edit(notification $notification)
+    public function edit(Order_historie $order_historie)
     {
         //
     }
@@ -64,10 +64,10 @@ class NotificationController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\notification  $notification
+     * @param  \App\Models\Order_historie  $order_historie
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, notification $notification)
+    public function update(Request $request, Order_historie $order_historie)
     {
         //
     }
@@ -75,10 +75,10 @@ class NotificationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\notification  $notification
+     * @param  \App\Models\Order_historie  $order_historie
      * @return \Illuminate\Http\Response
      */
-    public function destroy(notification $notification)
+    public function destroy(Order_historie $order_historie)
     {
         //
     }

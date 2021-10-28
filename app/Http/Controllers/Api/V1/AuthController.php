@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
 
 use App\Models\User;
+use App\Repository\UserRepositoryInterface;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,8 +12,15 @@ use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 
-class ApiController extends Controller
+class AuthController extends Controller
 {
+    private $userRepository;
+
+    public function __construct(UserRepositoryInterface $userRepository)
+    {
+        $this->userRepository = $userRepository;
+    }
+
     public function register(Request $request)
     {
         //Validate data
@@ -28,12 +36,8 @@ class ApiController extends Controller
             return response()->json(['error' => $validator->messages()], 200);
         }
 
-        //Request is valid, create new user
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password)
-        ]);
+       //Request is valid, create new user
+        $user= $this->userRepository->register($request);
 
         //User created, return success response
         return response()->json([
@@ -111,9 +115,6 @@ class ApiController extends Controller
 
     public function get_user(Request $request)
     {
-//        $this->validate($request, [
-//            'token' => 'required'
-//        ]);
         $user = JWTAuth::authenticate($request->token);
 
         return response()->json(['user' => $user]);

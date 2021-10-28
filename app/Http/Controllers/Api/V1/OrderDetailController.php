@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\api\V1;
 
-use App\Models\Order_historie;
+use App\Models\Order_detail;
 use Illuminate\Http\Request;
 
-class OrderHistorieController extends Controller
+class OrderDetailController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class OrderHistorieController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Order_historie  $order_historie
+     * @param  \App\Models\Order_detail  $order_detail
      * @return \Illuminate\Http\Response
      */
-    public function show(Order_historie $order_historie)
+    public function show(Order_detail $order_detail)
     {
         //
     }
@@ -52,10 +52,10 @@ class OrderHistorieController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Order_historie  $order_historie
+     * @param  \App\Models\Order_detail  $order_detail
      * @return \Illuminate\Http\Response
      */
-    public function edit(Order_historie $order_historie)
+    public function edit(Order_detail $order_detail)
     {
         //
     }
@@ -64,10 +64,10 @@ class OrderHistorieController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Order_historie  $order_historie
+     * @param  \App\Models\Order_detail  $order_detail
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Order_historie $order_historie)
+    public function update(Request $request, Order_detail $order_detail)
     {
         //
     }
@@ -75,10 +75,10 @@ class OrderHistorieController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Order_historie  $order_historie
+     * @param  \App\Models\Order_detail  $order_detail
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Order_historie $order_historie)
+    public function destroy(Order_detail $order_detail)
     {
         //
     }

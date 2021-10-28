@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\api\V1;
 
-use App\Models\Deliverie;
+use App\Models\notification;
 use Illuminate\Http\Request;
 
-class DeliverieController extends Controller
+class NotificationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class DeliverieController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Deliverie  $deliverie
+     * @param  \App\Models\notification  $notification
      * @return \Illuminate\Http\Response
      */
-    public function show(Deliverie $deliverie)
+    public function show(notification $notification)
     {
         //
     }
@@ -52,10 +52,10 @@ class DeliverieController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Deliverie  $deliverie
+     * @param  \App\Models\notification  $notification
      * @return \Illuminate\Http\Response
      */
-    public function edit(Deliverie $deliverie)
+    public function edit(notification $notification)
     {
         //
     }
@@ -64,10 +64,10 @@ class DeliverieController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Deliverie  $deliverie
+     * @param  \App\Models\notification  $notification
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Deliverie $deliverie)
+    public function update(Request $request, notification $notification)
     {
         //
     }
@@ -75,10 +75,10 @@ class DeliverieController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Deliverie  $deliverie
+     * @param  \App\Models\notification  $notification
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Deliverie $deliverie)
+    public function destroy(notification $notification)
     {
         //
     }
