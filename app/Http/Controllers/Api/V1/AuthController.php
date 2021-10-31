@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Repository\UserRepositoryInterface;
 use Illuminate\Http\Request;
