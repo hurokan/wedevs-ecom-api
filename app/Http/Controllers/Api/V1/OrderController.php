@@ -1,86 +1,47 @@
 <?php
 
-namespace App\Http\Controllers\api\V1;
+namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Repository\OrderRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Symfony\Component\HttpFoundation\Response;
 
 class OrderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    private  $orderRepository;
+
+    public function __construct(OrderRepositoryInterface $orderRepository)
     {
-        //
+        $this->orderRepository=$orderRepository;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+    public function storePlaceOrder(Request $request){
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        //Validate data
+        $data = $request->only('shipping_address','contact_no','shipping_method');
+        $validator = Validator::make($data, [
+            'shipping_address' => 'required|string',
+            'contact_no' => 'required|string',
+            'shipping_method' => 'required|string',
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Order $order)
-    {
-        //
-    }
+        //Send failed response if request is not valid
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->messages()], 200);
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Order $order)
-    {
-        //
-    }
+        //Request is valid, create new order
+        $order= $this->orderRepository->placeOrder($request);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Order $order)
-    {
-        //
-    }
+        //User created, return success response
+        return response()->json([
+            'success' => true,
+            'message' => 'Order created successfully',
+            'data' => $order
+        ], Response::HTTP_OK);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Order $order)
-    {
-        //
     }
 }

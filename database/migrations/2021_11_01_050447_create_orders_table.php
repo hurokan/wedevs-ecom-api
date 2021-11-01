@@ -19,6 +19,9 @@ class CreateOrdersTable extends Migration
             $table->integer('total_qty');
             $table->float('total_vat');
             $table->float('net_amount');
+            $table->string('shipping_address');
+            $table->string('contact_no');
+            $table->string('shipping_method')->default('COD');
             $table->enum('status',['Approved', 'Rejected','Processing','Shipped','Delivered','Pending'])->default('Pending');
             $table->bigInteger('created_by');
             $table->bigInteger('updated_by')->unsigned()->nullable();

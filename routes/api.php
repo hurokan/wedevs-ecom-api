@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\ProductController;
+use App\Http\Controllers\Api\V1\OrderController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -22,5 +23,6 @@ Route::post('search-product', [ProductController::class, 'searchProduct']);
 Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('logout', [AuthController::class, 'logout']);
     Route::get('get_user', [AuthController::class, 'get_user']);
+    Route::Post('place-order', [OrderController::class, 'storePlaceOrder']);
 
 });
