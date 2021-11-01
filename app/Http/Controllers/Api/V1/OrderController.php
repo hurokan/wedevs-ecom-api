@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Models\Order;
 use App\Repository\OrderDetailRepositoryInterface;
 use App\Repository\OrderRepositoryInterface;
 use App\Repository\UserNotificationRepositoryInterface;
