@@ -41,6 +41,9 @@ class OrderController extends Controller
 
         //Request is valid, create new order
         $order= $this->orderRepository->placeOrder($request);
+
+        //Create Notification
+
         $notification_data=array();
         $notification_data['notification_to_user_id']=1;
         $notification_data['notification_body']="A order has been placed order num# ".$order->order_no;
