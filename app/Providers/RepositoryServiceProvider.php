@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repository\DeliveryRepository;
+use App\Repository\DeliveryRepositoryInterface;
 use App\Repository\Eloquent\BaseRepository;
 use App\Repository\EloquentRepositoryInterface;
 use App\Repository\OrderDetailRepository;
@@ -31,6 +33,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(OrderRepositoryInterface::class,OrderRepository::class);
         $this->app->bind(OrderDetailRepositoryInterface::class,OrderDetailRepository::class);
         $this->app->bind(UserNotificationRepositoryInterface::class,UserNotificationRepository::class);
+        $this->app->bind(DeliveryRepositoryInterface::class,DeliveryRepository::class);
     }
 
     /**
