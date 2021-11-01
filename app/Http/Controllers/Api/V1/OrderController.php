@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Repository\OrderDetailRepositoryInterface;
 use App\Repository\OrderRepositoryInterface;
+use App\Repository\UserNotificationRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,10 +14,14 @@ use Symfony\Component\HttpFoundation\Response;
 class OrderController extends Controller
 {
     private  $orderRepository;
+    private  $orderDtlRepository;
+    private  $userNotificationRepository;
 
-    public function __construct(OrderRepositoryInterface $orderRepository)
+    public function __construct(OrderRepositoryInterface $orderRepository,OrderDetailRepositoryInterface $orderDtlRepository,UserNotificationRepositoryInterface $userNotificationRepository)
     {
         $this->orderRepository=$orderRepository;
+        $this->orderDtlRepository=$orderDtlRepository;
+        $this->userNotificationRepository=$userNotificationRepository;
     }
 
     public function storePlaceOrder(Request $request){
@@ -35,8 +41,15 @@ class OrderController extends Controller
 
         //Request is valid, create new order
         $order= $this->orderRepository->placeOrder($request);
+        $notification_data=array();
+        $notification_data['notification_to_user_id']=1;
+        $notification_data['notification_body']="A order has been placed order num# ".$order->order_no;
 
-        //User created, return success response
+        if($order){
+            $order_dtl= $this->orderDtlRepository->placeOrderDtl($request,$order->id);
+            $admin_notification= $this->userNotificationRepository->createNotification($notification_data,'WEB');
+        }
+        //Order created, return success response
         return response()->json([
             'success' => true,
             'message' => 'Order created successfully',

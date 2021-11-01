@@ -5,21 +5,18 @@ namespace App\Repository;
 
 
 use App\Models\Order;
-use App\Models\Order_detail;
 use App\Repository\Eloquent\BaseRepository;
-use App\Repository\UserRepositoryInterface;
 
 class OrderRepository extends BaseRepository implements OrderRepositoryInterface
 {
     /**
-     * UserRepository constructor.
+     * OrderRepository constructor.
      *
      * @param Order $model
-     * @param Order_detail $detail
      */
-    public function __construct(Order $model,Order_detail $detail)
+    public function __construct(Order $model)
     {
-        parent::__construct($model,$detail);
+        parent::__construct($model);
     }
 
     public function placeOrder($request=[])
@@ -33,6 +30,7 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
         $order_summary['net_amount']=$order_summary['total_amount']+$order_summary['total_vat'];
 
         $order= $this->model->create([
+            'order_no' => 'WEDEV'.date('Ymd') . str_pad(mt_rand(1, 99999), 5, '0', STR_PAD_LEFT),
             'total_amount' => $order_summary['total_amount'],
             'total_qty' => $items['qty'],
             'total_vat' => $order_summary['total_vat'],
@@ -42,6 +40,7 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
             'shipping_method' =>'COD',
             'created_by' =>$items['user_id']
         ]);
+        return $order;
 
     }
 

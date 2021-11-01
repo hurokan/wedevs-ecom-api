@@ -15,6 +15,8 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->string('order_no');
+            $table->string('order_tracking_no')->nullable();
             $table->float('total_amount');
             $table->integer('total_qty');
             $table->float('total_vat');
